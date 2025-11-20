@@ -1,11 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://c42kllq52c7vj"]
+[gd_scene load_steps=7 format=3 uid="uid://c42kllq52c7vj"]
 
 [ext_resource type="PackedScene" uid="uid://ysvbbkovqprw" path="res://Enemies/Models/characters/gltf/Rogue.glb" id="1_dwibw"]
+[ext_resource type="Script" uid="uid://d2bm5tmicy54g" path="res://Enemies/Scripts/enemigo_patrulla.gd" id="1_ko11w"]
 [ext_resource type="PackedScene" uid="uid://v8b2pffno4ll" path="res://Enemies/Models/items/gltf/dagger.gltf" id="2_ko11w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q3bf3"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_dwibw"]
+radius = 0.7828006
+
+[sub_resource type="GDScript" id="GDScript_q3bf3"]
+script/source = "extends NavigationRegion3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [node name="EnemigoPatrulla" type="CharacterBody3D"]
+script = ExtResource("1_ko11w")
 
 [node name="Rogue" parent="." instance=ExtResource("1_dwibw")]
 
@@ -19,5 +38,16 @@ bone_idx = 16
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006111026, 1.0284928, 0)
 shape = SubResource("CapsuleShape3D_q3bf3")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014867544, 1.1572847, 0)
+shape = SubResource("SphereShape3D_dwibw")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+script = SubResource("GDScript_q3bf3")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
 [editable path="Rogue"]
