@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c42kllq52c7vj"]
+
+[ext_resource type="PackedScene" uid="uid://ysvbbkovqprw" path="res://Enemies/Models/characters/gltf/Rogue.glb" id="1_dwibw"]
+[ext_resource type="PackedScene" uid="uid://v8b2pffno4ll" path="res://Enemies/Models/items/gltf/dagger.gltf" id="2_ko11w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q3bf3"]
+
+[node name="EnemigoPatrulla" type="CharacterBody3D"]
+
+[node name="Rogue" parent="." instance=ExtResource("1_dwibw")]
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Rogue/Rig_Medium/Skeleton3D" index="7"]
+transform = Transform3D(-0.999999, 4.6839318e-07, 4.5751068e-07, 3.9800034e-07, -5.8875344e-07, 0.99999946, 3.9761645e-07, 0.99999946, 5.358822e-07, -0.8831323, 1.0492611, -7.2884757e-07)
+bone_name = "handslot.r"
+bone_idx = 16
+
+[node name="dagger2" parent="Rogue/Rig_Medium/Skeleton3D/BoneAttachment3D" instance=ExtResource("2_ko11w")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006111026, 1.0284928, 0)
+shape = SubResource("CapsuleShape3D_q3bf3")
+
+[editable path="Rogue"]
