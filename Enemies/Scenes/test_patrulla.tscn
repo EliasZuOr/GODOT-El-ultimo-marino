@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm47kp7vc642j"]
+[gd_scene load_steps=8 format=3 uid="uid://bm47kp7vc642j"]
 
 [ext_resource type="PackedScene" uid="uid://c42kllq52c7vj" path="res://Enemies/Scenes/enemigo_patrulla.tscn" id="1_vx2vj"]
+[ext_resource type="PackedScene" uid="uid://8h82b5mlwv4x" path="res://Enemies/Scenes/enemigo_caballero.tscn" id="2_m1lci"]
+[ext_resource type="PackedScene" uid="uid://b64qjw8xj5bai" path="res://Enemies/Scenes/enemigo_mago.tscn" id="3_uyt3w"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_m1lci"]
-vertices = PackedVector3Array(-4.5, 0.5, -4.5, -4.5, 0.5, 4.5, 4.5, 0.5, 4.5, 4.5, 0.5, -4.5)
+vertices = PackedVector3Array(-49.5, 0.5, -49.5, -49.5, 0.5, 49.5, 49.5, 0.5, 49.5, 49.5, 0.5, -49.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_uyt3w"]
-size = Vector2(10, 10)
+size = Vector2(100, 100)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dtsll"]
 data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
@@ -16,6 +18,15 @@ data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0
 
 [node name="Test Patrulla" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09688854, 0.2221154, 0)
+
+[node name="EnemigoPatrulla" parent="." instance=ExtResource("1_vx2vj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5383129, 0.0020253658, -0.2784145)
+
+[node name="EnemigoPatrulla3" parent="." instance=ExtResource("2_m1lci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7296696, 0.28451133, 2.4200573)
+
+[node name="EnemigoPatrulla2" parent="." instance=ExtResource("3_uyt3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5268326, 0.0020253062, 2.86862)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_m1lci")
@@ -28,18 +39,33 @@ mesh = SubResource("PlaneMesh_uyt3w")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_dtsll")
 
-[node name="Marker3D" type="Marker3D" parent="." groups=["RutaEnemigo1"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.027103782, -3.427806)
-
-[node name="Marker3D2" type="Marker3D" parent="." groups=["RutaEnemigo1"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01976049, 3.645288)
-
-[node name="EnemigoPatrulla" parent="." instance=ExtResource("1_vx2vj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5383129, 0.0020253658, -0.2784145)
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.9986568, -0.0072091944, 0.051309075, 0, 0.99027294, 0.13913853, -0.051813066, -0.13895164, 0.9889428, -0.30268055, 2.8364477, 6.652568)
+transform = Transform3D(0.9986568, -0.0072091944, 0.051309075, 0, 0.99027294, 0.13913853, -0.051813066, -0.13895164, 0.9889428, -0.30268055, 5.649168, 21.315899)
 fov = 90.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vx2vj")
+
+[node name="RutaEnemigo1" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="RutaEnemigo1" groups=["RutaEnemigo1"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="RutaEnemigo1" groups=["RutaEnemigo1"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="RutaEnemigo2" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="RutaEnemigo2" groups=["RutaEnemigo2"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="Marker3D2" type="Marker3D" parent="RutaEnemigo2" groups=["RutaEnemigo2"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="RutaEnemigo3" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="RutaEnemigo3" groups=["RutaEnemigo3"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="Marker3D2" type="Marker3D" parent="RutaEnemigo3" groups=["RutaEnemigo3"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)

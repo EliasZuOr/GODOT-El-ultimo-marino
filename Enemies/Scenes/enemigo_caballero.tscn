@@ -1,0 +1,154 @@
+[gd_scene load_steps=24 format=3 uid="uid://8h82b5mlwv4x"]
+
+[ext_resource type="Script" uid="uid://d2bm5tmicy54g" path="res://Enemies/Scripts/enemigo_patrulla.gd" id="1_nfuqo"]
+[ext_resource type="PackedScene" uid="uid://d064hmpf5rd2e" path="res://Enemies/Models/characters/gltf/Knight.glb" id="2_nfuqo"]
+[ext_resource type="PackedScene" uid="uid://cd8vo8mnh8qct" path="res://Enemies/Models/items/gltf/sword_1handed.gltf" id="3_88y14"]
+[ext_resource type="AnimationLibrary" uid="uid://b40d85y1d7h8u" path="res://Enemies/Animaciones/Rig_Medium/Rig_Medium_General.glb" id="4_knm5v"]
+[ext_resource type="AnimationLibrary" uid="uid://dyvj6tgbkj7wq" path="res://Enemies/Animaciones/Rig_Medium/Rig_Medium_MovementBasic.glb" id="5_34x0w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q3bf3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dwibw"]
+radius = 0.7828006
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nvbjw"]
+animation = &"Rig_Medium_General/Throw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x1hai"]
+animation = &"Rig_Medium_General/Idle_B"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bl36p"]
+animation = &"Rig_Medium_MovementBasic/Running_A"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lexfb"]
+animation = &"Rig_Medium_MovementBasic/Walking_A"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j6ffu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rtpx0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dn8ec"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o6xcr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pss73"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nvbjw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bl36p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lexfb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x1hai"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xf5kh"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_t2ku8"]
+states/Attack/node = SubResource("AnimationNodeAnimation_nvbjw")
+states/Attack/position = Vector2(718, 105)
+states/Idle/node = SubResource("AnimationNodeAnimation_x1hai")
+states/Idle/position = Vector2(130, 167)
+states/Run/node = SubResource("AnimationNodeAnimation_bl36p")
+states/Run/position = Vector2(460, 220)
+states/Start/position = Vector2(56, 32)
+states/Walk/node = SubResource("AnimationNodeAnimation_lexfb")
+states/Walk/position = Vector2(442, 46)
+transitions = ["Walk", "Run", SubResource("AnimationNodeStateMachineTransition_j6ffu"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_rtpx0"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_dn8ec"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_o6xcr"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_pss73"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_nvbjw"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_bl36p"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lexfb"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_x1hai"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_xf5kh")]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x1hai"]
+height = 8.481201
+radius = 3.2016602
+
+[node name="EnemigoCaballero" type="CharacterBody3D" node_paths=PackedStringArray("anim_tree")]
+script = ExtResource("1_nfuqo")
+waypoints_grupo = "RutaEnemigo2"
+estado_quieto = "Idle"
+estado_caminar = "Walk"
+estado_atacar = "Attack"
+anim_tree = NodePath("AnimationTree")
+
+[node name="Knight" parent="." instance=ExtResource("2_nfuqo")]
+
+[node name="Skeleton3D" parent="Knight/Rig_Medium" index="0"]
+bones/1/position = Vector3(0, 0.39206383, 0)
+bones/1/rotation = Quaternion(-1.11122625e-10, 0.043157753, 2.5724098e-09, 0.9990683)
+bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
+bones/2/rotation = Quaternion(-6.938893e-18, 7.1054274e-15, 4.93038e-32, 1)
+bones/2/scale = Vector3(1.0000001, 1, 1.0000001)
+bones/3/rotation = Quaternion(8.271806e-25, 3.7252903e-09, -2.75506e-40, 1)
+bones/3/scale = Vector3(1, 0.9999999, 1)
+bones/4/position = Vector3(0.21200736, 0.13413203, 7.9299625e-08)
+bones/4/rotation = Quaternion(-0.5599063, -0.060880348, -0.6439745, 0.5177794)
+bones/4/scale = Vector3(0.9999991, 0.9999986, 0.9999996)
+bones/5/rotation = Quaternion(3.7650654e-08, -5.1384802e-08, -0.4947193, 0.8690529)
+bones/6/rotation = Quaternion(7.250843e-09, 9.200791e-09, 0.026658095, 0.99964464)
+bones/7/rotation = Quaternion(-0.32106528, -0.32531866, 0.1457259, 0.8774103)
+bones/8/position = Vector3(-6.936717e-09, 0.096125185, -0.057500005)
+bones/8/rotation = Quaternion(6.9489685e-09, -3.587743e-09, -0.7071068, 0.7071067)
+bones/9/position = Vector3(-0.21200737, 0.13413203, 8.6813984e-08)
+bones/9/rotation = Quaternion(-0.6182439, 0.08072865, 0.61801153, 0.47887278)
+bones/9/scale = Vector3(0.99999905, 0.9999985, 0.9999996)
+bones/10/rotation = Quaternion(2.1687793e-08, 6.223694e-08, 0.5179393, 0.85541743)
+bones/11/rotation = Quaternion(7.300499e-09, -7.3388096e-09, -0.0266581, 0.99964464)
+bones/12/rotation = Quaternion(-0.31929126, 0.30052418, -0.22734971, 0.8695116)
+bones/13/position = Vector3(-1.541501e-08, 0.096125126, -0.057499975)
+bones/13/rotation = Quaternion(-9.53579e-10, -4.3147743e-09, 0.7071068, 0.7071067)
+bones/13/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/14/rotation = Quaternion(-5.8060785e-11, -0.031341746, -1.880125e-09, 0.99950874)
+bones/14/scale = Vector3(1, 0.99999994, 1)
+bones/15/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
+bones/15/rotation = Quaternion(0.9973222, -0.029457364, 0.03152927, 0.05904832)
+bones/15/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
+bones/16/rotation = Quaternion(0.2740081, -6.3812955e-08, 1.927607e-07, 0.9617275)
+bones/17/rotation = Quaternion(-0.5590394, 0.11451276, -0.008627633, 0.82115)
+bones/18/rotation = Quaternion(-8.9348905e-05, 0.9202216, -0.39139763, 2.0290994e-05)
+bones/19/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
+bones/19/rotation = Quaternion(0.9927243, -0.003953806, 0.04276561, 0.11248982)
+bones/19/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
+bones/20/rotation = Quaternion(0.2954667, 6.2797426e-08, -2.0384442e-07, 0.95535314)
+bones/21/rotation = Quaternion(-0.5400721, 4.1242718e-05, 0.0009099837, 0.8416183)
+bones/22/rotation = Quaternion(-2.2034571e-06, 0.9202539, -0.391322, 5.628661e-07)
+bones/22/scale = Vector3(1, 0.9999977, 1.0000024)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Knight/Rig_Medium/Skeleton3D" index="9"]
+transform = Transform3D(-0.5529307, -0.5019059, -0.6650985, -0.20345655, -0.6927296, 0.69190234, -0.80800426, 0.5178934, 0.28091604, -0.51085746, 0.7882963, 0.05974268)
+bone_name = "wrist.r"
+bone_idx = 11
+
+[node name="sword_1handed2" parent="Knight/Rig_Medium/Skeleton3D/BoneAttachment3D" instance=ExtResource("3_88y14")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006111026, 1.0284928, 0)
+shape = SubResource("CapsuleShape3D_q3bf3")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014867544, 1.1572847, 0)
+shape = SubResource("SphereShape3D_dwibw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Knight")
+libraries = {
+&"Rig_Medium_General": ExtResource("4_knm5v"),
+&"Rig_Medium_MovementBasic": ExtResource("5_34x0w")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Knight")
+tree_root = SubResource("AnimationNodeStateMachine_t2ku8")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AreaVision" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaVision"]
+transform = Transform3D(0.79254514, 0.025025874, 0.6092995, 0.6098132, -0.032524936, -0.79187745, 0, 0.99915755, -0.04103859, 0.019291803, 1.1602118, 4.7896814)
+shape = SubResource("CylinderShape3D_x1hai")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="AreaVision" to="." method="_on_area_vision_body_entered"]
+[connection signal="body_exited" from="AreaVision" to="." method="_on_area_vision_body_exited"]
+
+[editable path="Knight"]
