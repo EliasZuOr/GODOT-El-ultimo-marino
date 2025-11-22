@@ -171,6 +171,7 @@ reference_frame = 1
 script = ExtResource("15_a04ho")
 iterations = 5
 offset_step = 0.1
+use_computeshader = false
 restrict_height = true
 
 [sub_resource type="Resource" id="Resource_ytx46"]
@@ -209,6 +210,7 @@ reference_frame = 1
 script = ExtResource("15_a04ho")
 iterations = 5
 offset_step = 0.1
+use_computeshader = false
 restrict_height = true
 
 [sub_resource type="Resource" id="Resource_0xjqb"]
@@ -247,6 +249,7 @@ reference_frame = 1
 script = ExtResource("15_a04ho")
 iterations = 5
 offset_step = 0.1
+use_computeshader = false
 restrict_height = true
 
 [sub_resource type="Resource" id="Resource_wbvx1"]
@@ -285,6 +288,7 @@ reference_frame = 1
 script = ExtResource("15_a04ho")
 iterations = 5
 offset_step = 0.1
+use_computeshader = false
 restrict_height = true
 
 [sub_resource type="Resource" id="Resource_3f6it"]
@@ -323,6 +327,7 @@ reference_frame = 1
 script = ExtResource("15_a04ho")
 iterations = 5
 offset_step = 0.1
+use_computeshader = false
 restrict_height = true
 
 [sub_resource type="Resource" id="Resource_6jea4"]
@@ -361,6 +366,7 @@ reference_frame = 1
 script = ExtResource("15_a04ho")
 iterations = 5
 offset_step = 0.1
+use_computeshader = false
 restrict_height = true
 
 [sub_resource type="Resource" id="Resource_55afa"]
@@ -1407,7 +1413,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.779458, 1.9836086, -6.7883
 
 [node name="Player" parent="." instance=ExtResource("26_a04ho")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0729995, 2.008091, 13.337597)
-vida_maxima = 3
+
+[node name="Minimapa" type="Node3D" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Minimapa"]
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="SubViewport" type="SubViewport" parent="Minimapa/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
 
 [editable path="Enemies/EnemigoPatrulla"]
 [editable path="Enemies/EnemigoPatrulla/Rogue"]
