@@ -1419,11 +1419,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0729995, 2.008091, 13.3375
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Minimapa"]
 offset_right = 200.0
 offset_bottom = 200.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="SubViewport" type="SubViewport" parent="Minimapa/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(200, 200)
 render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Minimapa/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.034725048, 0.9993969, 0, -0.9993969, 0.034725048, 5.608344, 17.72753, 0.5903293)
+cull_mask = 1047555
+fov = 111.01459
 
 [editable path="Enemies/EnemigoPatrulla"]
 [editable path="Enemies/EnemigoPatrulla/Rogue"]
