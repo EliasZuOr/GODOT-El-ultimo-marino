@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdtqrnccs71kk"]
+
+[ext_resource type="PackedScene" uid="uid://cec062hawg0wa" path="res://moneda/GoldCoin.dae" id="1_avh4n"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rnkv7"]
+height = 0.47233653
+radius = 0.97314453
+
+[node name="Moneda" type="Node3D"]
+
+[node name="GoldCoin" parent="." instance=ExtResource("1_avh4n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2465055, 1.2301686, -0.014600873)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.029875558, 0.9995536, 0, -0.9995536, 0.029875558, 0, 0, 0, 1, 0.2157911, 1.2581549, 0)
+shape = SubResource("CylinderShape3D_rnkv7")

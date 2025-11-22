@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3odx5viwfdqq"]
+
+[ext_resource type="Script" uid="uid://ddoprp64oimj4" path="res://moneda/coin.gd" id="1_il865"]
+[ext_resource type="PackedScene" uid="uid://cec062hawg0wa" path="res://moneda/GoldCoin.dae" id="1_mj8eo"]
+[ext_resource type="AudioStream" uid="uid://bedk7cyby1gul" path="res://moneda/Picked Coin Echo.wav" id="3_ew24s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5a0ea"]
+size = Vector3(1, 1.7192383, 1.7763062)
+
+[node name="Coin" type="Area3D"]
+script = ExtResource("1_il865")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.054665565, -0.03768921)
+shape = SubResource("BoxShape3D_5a0ea")
+
+[node name="GoldCoin" parent="." instance=ExtResource("1_mj8eo")]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ew24s")

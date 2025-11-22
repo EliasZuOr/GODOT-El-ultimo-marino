@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dib8sfv42o4ra"
+path="res://.godot/imported/Where My Home Is.wav-7e3299524555eaf480fc15cb62038156.sample"
+
+[deps]
+
+source_file="res://Where My Home Is.wav"
+dest_files=["res://.godot/imported/Where My Home Is.wav-7e3299524555eaf480fc15cb62038156.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
