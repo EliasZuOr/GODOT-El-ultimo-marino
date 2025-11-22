@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://docbpe2ain1su"
+path="res://.godot/imported/detail-light-double.obj-64bbf2d11137e8fc3e353b8b9567a8bf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/detail-light-double.obj-64bbf2d11137e8fc3e353b8b9567a8bf.mesh"]
+
+source_file="res://assets/retro-urban/OBJ format/detail-light-double.obj"
+dest_files=["res://.godot/imported/detail-light-double.obj-64bbf2d11137e8fc3e353b8b9567a8bf.mesh", "res://.godot/imported/detail-light-double.obj-64bbf2d11137e8fc3e353b8b9567a8bf.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

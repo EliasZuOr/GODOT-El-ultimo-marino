@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bbwf53s4412em"
+path="res://.godot/imported/wall-a-low-painted.obj-c450fb9742473a083bffdf5b8efec6dc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall-a-low-painted.obj-c450fb9742473a083bffdf5b8efec6dc.mesh"]
+
+source_file="res://assets/retro-urban/OBJ format/wall-a-low-painted.obj"
+dest_files=["res://.godot/imported/wall-a-low-painted.obj-c450fb9742473a083bffdf5b8efec6dc.mesh", "res://.godot/imported/wall-a-low-painted.obj-c450fb9742473a083bffdf5b8efec6dc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

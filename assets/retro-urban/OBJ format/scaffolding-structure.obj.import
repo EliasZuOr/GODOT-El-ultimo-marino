@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://s8nkmgekv1ia"
+path="res://.godot/imported/scaffolding-structure.obj-95cf4b3168847040f3d6beec8b883d05.mesh"
+
+[deps]
+
+files=["res://.godot/imported/scaffolding-structure.obj-95cf4b3168847040f3d6beec8b883d05.mesh"]
+
+source_file="res://assets/retro-urban/OBJ format/scaffolding-structure.obj"
+dest_files=["res://.godot/imported/scaffolding-structure.obj-95cf4b3168847040f3d6beec8b883d05.mesh", "res://.godot/imported/scaffolding-structure.obj-95cf4b3168847040f3d6beec8b883d05.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
