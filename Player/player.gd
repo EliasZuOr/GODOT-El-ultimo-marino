@@ -1,11 +1,10 @@
 extends CharacterBody3D
 
-# --- ESTE SCRIPT ES EXCLUSIVO DEL JUGADOR (ACTUALIZADO CON ITEMS) ---
-
 # Señales
 signal vida_cambiada(vida_actual)
 signal jugador_muerto
-signal item_recolectado(cantidad_actual) # ¡NUEVA SEÑAL!
+signal item_recolectado(cantidad_actual)
+signal juego_ganado # ¡NUEVA SEÑAL DE VICTORIA!
 
 # --- CONFIGURACIÓN ---
 @export_group("Movimiento")
@@ -15,8 +14,9 @@ signal item_recolectado(cantidad_actual) # ¡NUEVA SEÑAL!
 
 @export_group("Stats")
 @export var vida_maxima: int = 3
+@export var items_para_ganar: int = 1 # Meta configurable
 var vida_actual: int
-var items_totales: int = 0 # Contador de items
+var items_totales: int = 0
 
 # --- ANIMACIONES ---
 @export_group("Animaciones")
@@ -42,9 +42,6 @@ func _ready():
 	add_to_group("Jugador")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	vida_actual = vida_maxima
-	
-	# Emitimos la vida inicial para que el HUD la sepa al empezar
-	# (Usamos call_deferred para esperar a que el HUD esté listo)
 	call_deferred("emitir_datos_iniciales")
 	
 	if anim_tree:
@@ -60,7 +57,7 @@ func _input(event):
 	if control_bloqueado: return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * sensibilidad_mouse)
-		brazo_camara.rotate_x(-event.relative.y * sensibilidad_mouse)
+		brazo_camara.rotate_x(-event.relative.y * sensibilidad_mouse) # Sin invertir (Estándar)
 		brazo_camara.rotation.x = clamp(brazo_camara.rotation.x, deg_to_rad(-70), deg_to_rad(60))
 
 	if event.is_action_pressed("ui_cancel"):
@@ -72,6 +69,8 @@ func _input(event):
 func _physics_process(delta):
 	if not is_on_floor(): velocity.y -= gravedad * delta
 	if control_bloqueado or esta_herido:
+		velocity.x = 0
+		velocity.z = 0
 		move_and_slide()
 		return 
 
@@ -101,7 +100,7 @@ func recibir_dano(cantidad: int):
 	if vida_actual <= 0: return
 	vida_actual -= cantidad
 	print("Jugador: Vida restante: ", vida_actual)
-	vida_cambiada.emit(vida_actual) # Avisamos al HUD
+	vida_cambiada.emit(vida_actual)
 	esta_herido = true
 	start_anim(estado_golpe)
 	if vida_actual <= 0:
@@ -117,9 +116,16 @@ func morir():
 	jugador_muerto.emit()
 
 func recolectar_item():
-	items_totales += 1 # Sumamos 1
+	items_totales += 1
 	print("Jugador: Item recolectado. Total: ", items_totales)
-	
-	item_recolectado.emit(items_totales) # Avisamos al HUD
-	
+	item_recolectado.emit(items_totales)
 	start_anim(estado_recoger)
+	
+	# --- VERIFICACIÓN DE VICTORIA ---
+	if items_totales >= items_para_ganar:
+		ganar_juego()
+
+func ganar_juego():
+	print("Jugador: ¡VICTORIA! Recogiste todos los items.")
+	control_bloqueado = true # Bloqueamos el movimiento
+	juego_ganado.emit()      # Avisamos al HUD
