@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjrvw4jav41qp"
+path="res://.godot/imported/planks.obj-e828b91a2a1ce6c4e5a3ec024e1f26dc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/planks.obj-e828b91a2a1ce6c4e5a3ec024e1f26dc.mesh"]
+
+source_file="res://assets/retro-urban/OBJ format/planks.obj"
+dest_files=["res://.godot/imported/planks.obj-e828b91a2a1ce6c4e5a3ec024e1f26dc.mesh", "res://.godot/imported/planks.obj-e828b91a2a1ce6c4e5a3ec024e1f26dc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

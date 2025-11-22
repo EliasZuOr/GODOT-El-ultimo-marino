@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjhxnwk1vegb0"
+path="res://.godot/imported/wall-b-roof-slant.obj-7be474d0e6e8e29a923cb3578793bdd1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall-b-roof-slant.obj-7be474d0e6e8e29a923cb3578793bdd1.mesh"]
+
+source_file="res://assets/retro-urban/OBJ format/wall-b-roof-slant.obj"
+dest_files=["res://.godot/imported/wall-b-roof-slant.obj-7be474d0e6e8e29a923cb3578793bdd1.mesh", "res://.godot/imported/wall-b-roof-slant.obj-7be474d0e6e8e29a923cb3578793bdd1.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
