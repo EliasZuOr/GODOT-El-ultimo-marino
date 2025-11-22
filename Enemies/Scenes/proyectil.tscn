@@ -32,3 +32,5 @@ shape = SubResource("SphereShape3D_r687p")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 omni_range = 0.30148715
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
