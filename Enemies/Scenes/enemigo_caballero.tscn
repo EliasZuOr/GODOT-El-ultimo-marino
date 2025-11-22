@@ -61,6 +61,7 @@ radius = 3.2016602
 
 [node name="EnemigoCaballero" type="CharacterBody3D" node_paths=PackedStringArray("anim_tree")]
 script = ExtResource("1_nfuqo")
+velocidad_correr = 3.0
 waypoints_grupo = "RutaEnemigo2"
 estado_quieto = "Idle"
 estado_caminar = "Walk"
