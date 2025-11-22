@@ -159,14 +159,23 @@ func atacar():
 	esta_atacando = true
 	velocity = Vector3.ZERO
 	
-	# Viajamos al estado de ataque en el árbol
 	state_machine.travel(estado_atacar)
 	
 	jugador_atrapado.emit(puntos_dano)
 	
-	# Esperamos un tiempo fijo (ej. 1 segundo) o usamos un Timer
-	# ya que AnimationTree no tiene "animation_finished" igual que el Player
-	await get_tree().create_timer(1.0).timeout 
+	# --- APLICACIÓN DE DAÑO DIRECTO ---
+	# Verificamos si podemos dañar al jugador
+	if jugador_detectado and jugador_detectado.has_method("recibir_dano"):
+		jugador_detectado.recibir_dano(puntos_dano)
+	elif jugador_detectado == null:
+		# Si el jugador ya se alejó pero el ataque se disparó, intentamos buscarlo en el grupo
+		var jugadores = get_tree().get_nodes_in_group("Jugador")
+		if jugadores.size() > 0:
+			# Si está muy cerca (rango de golpe), le damos
+			if global_position.distance_to(jugadores[0].global_position) < 2.5:
+				if jugadores[0].has_method("recibir_dano"):
+					jugadores[0].recibir_dano(puntos_dano)
+	# ----------------------------------
 	
+	await get_tree().create_timer(1.0).timeout 
 	esta_atacando = false
-	# Al terminar, el _physics_process nos devolverá a Idle o Caminar automáticamente
