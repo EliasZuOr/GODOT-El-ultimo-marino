@@ -14,7 +14,7 @@ signal juego_ganado # ¡NUEVA SEÑAL DE VICTORIA!
 
 @export_group("Stats")
 @export var vida_maxima: int = 3
-@export var items_para_ganar: int = 1 # Meta configurable
+@export var items_para_ganar: int = 10 # Meta configurable
 var vida_actual: int
 var items_totales: int = 0
 

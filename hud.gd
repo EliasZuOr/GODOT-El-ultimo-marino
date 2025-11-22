@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var label_items: Label = $Control/LabelItems
 
 # --- CONFIGURACIÓN DE ESCENAS ---
-@export_file("*.tscn") var ruta_menu: String = "res://Menu.tscn"
+@export_file("*.tscn") var ruta_menu: String = "res://main.tscn"
 
 # --- VARIABLES INTERNAS ---
 var tiempo_transcurrido: float = 0.0

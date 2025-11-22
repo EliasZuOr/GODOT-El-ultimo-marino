@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://cg5caklqblly4"]
+
+[ext_resource type="Script" uid="uid://c183742wyqflr" path="res://menus/menu_pausa/menu_pausa.gd" id="1_wsmwv"]
+[ext_resource type="FontFile" uid="uid://cmac5boqnbaw2" path="res://menus/menu_principal/tipografia/Tabby - Display.ttf" id="2_216hm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_216hm"]
+bg_color = Color(1, 1, 1, 0.9843137)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f3k8"]
+bg_color = Color(0.5529556, 0.55295557, 0.55295557, 0.9843137)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsmwv"]
+bg_color = Color(0.6789437, 0.6789437, 0.6789437, 0.9843137)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hi7lv"]
+
+[node name="MenuPausa" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_wsmwv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12156863, 0.12156863, 0.12156863, 0.84313726)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.0
+offset_top = 84.0
+offset_right = 109.0
+offset_bottom = 185.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9764706)
+theme_override_constants/shadow_offset_y = 6
+theme_override_fonts/font = ExtResource("2_216hm")
+theme_override_font_sizes/font_size = 100
+text = "Pausa"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.5
+offset_top = -71.5
+offset_right = 204.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Seguir" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 5
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_216hm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5f3k8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wsmwv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hi7lv")
+text = "Jugar"
+
+[node name="Salir" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 5
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_216hm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5f3k8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wsmwv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hi7lv")
+text = "Salir"
+
+[connection signal="pressed" from="VBoxContainer/Seguir" to="." method="_on_seguir_pressed"]
+[connection signal="pressed" from="VBoxContainer/Salir" to="." method="_on_salir_pressed"]
