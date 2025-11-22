@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bo1julv0q713d"]
+[gd_scene load_steps=37 format=3 uid="uid://bo1julv0q713d"]
 
 [ext_resource type="Script" uid="uid://b54y2awm5a1js" path="res://Player/player.gd" id="1_gwnis"]
 [ext_resource type="PackedScene" uid="uid://cwpdckvpfxu4q" path="res://Enemies/Models/characters/gltf/Ranger.glb" id="1_l8h54"]
@@ -83,9 +83,6 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m0h3t"]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i4o1l"]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j2n6q"]
 switch_mode = 2
 
@@ -94,7 +91,7 @@ states/End/position = Vector2(1279, 46)
 states/Rig_Medium_General_Death_A/node = SubResource("AnimationNodeAnimation_gwnis")
 states/Rig_Medium_General_Death_A/position = Vector2(1105, 85)
 states/Rig_Medium_General_Hit_A/node = SubResource("AnimationNodeAnimation_k53q1")
-states/Rig_Medium_General_Hit_A/position = Vector2(849, 220)
+states/Rig_Medium_General_Hit_A/position = Vector2(1036, 202)
 states/Rig_Medium_General_Idle_A/node = SubResource("AnimationNodeAnimation_fhl08")
 states/Rig_Medium_General_Idle_A/position = Vector2(367, 41)
 states/Rig_Medium_General_PickUp/node = SubResource("AnimationNodeAnimation_vtle1")
@@ -102,15 +99,14 @@ states/Rig_Medium_General_PickUp/position = Vector2(150, 172)
 states/Rig_Medium_General_Spawn_Ground/node = SubResource("AnimationNodeAnimation_od3ui")
 states/Rig_Medium_General_Spawn_Ground/position = Vector2(150, 106)
 states/Rig_Medium_MovementBasic_Jump_Full_Short/node = SubResource("AnimationNodeAnimation_00tjw")
-states/Rig_Medium_MovementBasic_Jump_Full_Short/position = Vector2(503, 220)
+states/Rig_Medium_MovementBasic_Jump_Full_Short/position = Vector2(502, 219)
 states/Rig_Medium_MovementBasic_Running_A/node = SubResource("AnimationNodeAnimation_x3vf3")
 states/Rig_Medium_MovementBasic_Running_A/position = Vector2(742, 39)
 states/Start/position = Vector2(48, 36)
-transitions = ["Start", "Rig_Medium_General_Spawn_Ground", SubResource("AnimationNodeStateMachineTransition_apopc"), "Rig_Medium_General_Spawn_Ground", "Rig_Medium_General_Idle_A", SubResource("AnimationNodeStateMachineTransition_5htga"), "Rig_Medium_General_Idle_A", "Rig_Medium_General_PickUp", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "Rig_Medium_General_Idle_A", "Rig_Medium_MovementBasic_Jump_Full_Short", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "Rig_Medium_General_Idle_A", "Rig_Medium_General_Hit_A", SubResource("AnimationNodeStateMachineTransition_dkpta"), "Rig_Medium_General_Idle_A", "Rig_Medium_MovementBasic_Running_A", SubResource("AnimationNodeStateMachineTransition_lfmf2"), "Rig_Medium_General_Idle_A", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_pisgm"), "Rig_Medium_MovementBasic_Running_A", "Rig_Medium_MovementBasic_Jump_Full_Short", SubResource("AnimationNodeStateMachineTransition_b1ygp"), "Rig_Medium_MovementBasic_Running_A", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_o28un"), "Rig_Medium_General_Hit_A", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_n471f"), "Rig_Medium_MovementBasic_Running_A", "Rig_Medium_General_Hit_A", SubResource("AnimationNodeStateMachineTransition_7emwf"), "Rig_Medium_General_Hit_A", "Rig_Medium_MovementBasic_Running_A", SubResource("AnimationNodeStateMachineTransition_hshwv"), "Rig_Medium_General_Hit_A", "Rig_Medium_General_Idle_A", SubResource("AnimationNodeStateMachineTransition_gpjlu"), "Rig_Medium_General_Hit_A", "Rig_Medium_MovementBasic_Jump_Full_Short", SubResource("AnimationNodeStateMachineTransition_8mwp6"), "Rig_Medium_General_Death_A", "End", SubResource("AnimationNodeStateMachineTransition_qemgg"), "Rig_Medium_General_PickUp", "Rig_Medium_General_Idle_A", SubResource("AnimationNodeStateMachineTransition_8viyr"), "Rig_Medium_General_PickUp", "Rig_Medium_MovementBasic_Running_A", SubResource("AnimationNodeStateMachineTransition_sm0op"), "Rig_Medium_General_PickUp", "Rig_Medium_MovementBasic_Jump_Full_Short", SubResource("AnimationNodeStateMachineTransition_76lrf"), "Rig_Medium_General_PickUp", "Rig_Medium_General_Hit_A", SubResource("AnimationNodeStateMachineTransition_efx54"), "Rig_Medium_General_PickUp", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_755ss"), "Rig_Medium_MovementBasic_Jump_Full_Short", "Rig_Medium_General_Idle_A", SubResource("AnimationNodeStateMachineTransition_bbimk"), "Rig_Medium_MovementBasic_Jump_Full_Short", "Rig_Medium_MovementBasic_Running_A", SubResource("AnimationNodeStateMachineTransition_m0h3t"), "Rig_Medium_MovementBasic_Jump_Full_Short", "Rig_Medium_General_Hit_A", SubResource("AnimationNodeStateMachineTransition_i4o1l"), "Rig_Medium_MovementBasic_Jump_Full_Short", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_j2n6q")]
+transitions = ["Start", "Rig_Medium_General_Spawn_Ground", SubResource("AnimationNodeStateMachineTransition_apopc"), "Rig_Medium_General_Spawn_Ground", "Rig_Medium_General_Idle_A", SubResource("AnimationNodeStateMachineTransition_5htga"), "Rig_Medium_General_Idle_A", "Rig_Medium_General_PickUp", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "Rig_Medium_General_Idle_A", "Rig_Medium_MovementBasic_Jump_Full_Short", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "Rig_Medium_General_Idle_A", "Rig_Medium_General_Hit_A", SubResource("AnimationNodeStateMachineTransition_dkpta"), "Rig_Medium_General_Idle_A", "Rig_Medium_MovementBasic_Running_A", SubResource("AnimationNodeStateMachineTransition_lfmf2"), "Rig_Medium_General_Idle_A", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_pisgm"), "Rig_Medium_MovementBasic_Running_A", "Rig_Medium_MovementBasic_Jump_Full_Short", SubResource("AnimationNodeStateMachineTransition_b1ygp"), "Rig_Medium_MovementBasic_Running_A", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_o28un"), "Rig_Medium_General_Hit_A", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_n471f"), "Rig_Medium_MovementBasic_Running_A", "Rig_Medium_General_Hit_A", SubResource("AnimationNodeStateMachineTransition_7emwf"), "Rig_Medium_General_Hit_A", "Rig_Medium_MovementBasic_Running_A", SubResource("AnimationNodeStateMachineTransition_hshwv"), "Rig_Medium_General_Hit_A", "Rig_Medium_General_Idle_A", SubResource("AnimationNodeStateMachineTransition_gpjlu"), "Rig_Medium_General_Hit_A", "Rig_Medium_MovementBasic_Jump_Full_Short", SubResource("AnimationNodeStateMachineTransition_8mwp6"), "Rig_Medium_General_Death_A", "End", SubResource("AnimationNodeStateMachineTransition_qemgg"), "Rig_Medium_General_PickUp", "Rig_Medium_General_Idle_A", SubResource("AnimationNodeStateMachineTransition_8viyr"), "Rig_Medium_General_PickUp", "Rig_Medium_MovementBasic_Running_A", SubResource("AnimationNodeStateMachineTransition_sm0op"), "Rig_Medium_General_PickUp", "Rig_Medium_MovementBasic_Jump_Full_Short", SubResource("AnimationNodeStateMachineTransition_76lrf"), "Rig_Medium_General_PickUp", "Rig_Medium_General_Hit_A", SubResource("AnimationNodeStateMachineTransition_efx54"), "Rig_Medium_General_PickUp", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_755ss"), "Rig_Medium_MovementBasic_Jump_Full_Short", "Rig_Medium_General_Idle_A", SubResource("AnimationNodeStateMachineTransition_bbimk"), "Rig_Medium_MovementBasic_Jump_Full_Short", "Rig_Medium_MovementBasic_Running_A", SubResource("AnimationNodeStateMachineTransition_m0h3t"), "Rig_Medium_MovementBasic_Jump_Full_Short", "Rig_Medium_General_Death_A", SubResource("AnimationNodeStateMachineTransition_j2n6q")]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("anim_tree")]
 script = ExtResource("1_gwnis")
-vida_maxima = 6
 anim_tree = NodePath("AnimationTree")
 
 [node name="Ranger" parent="." instance=ExtResource("1_l8h54")]

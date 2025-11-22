@@ -1,12 +1,12 @@
 extends CharacterBody3D
 
-# --- ESTE SCRIPT ES EXCLUSIVO DEL JUGADOR ---
+# --- ESTE SCRIPT ES EXCLUSIVO DEL JUGADOR (VERSIÓN FINAL CORREGIDA) ---
 
-# Señales para la barra de vida
+# Señales para la interfaz y juego
 signal vida_cambiada(vida_actual)
 signal jugador_muerto
 
-# --- CONFIGURACIÓN DE MOVIMIENTO ---
+# --- CONFIGURACIÓN ---
 @export_group("Movimiento")
 @export var velocidad: float = 5.0
 @export var velocidad_salto: float = 4.5
@@ -16,11 +16,10 @@ signal jugador_muerto
 @export var vida_maxima: int = 3
 var vida_actual: int
 
-# --- ANIMACIONES (MACHINE STATE) ---
+# --- ANIMACIONES (NOMBRES DE ESTADOS) ---
+# Asegúrate de que estos nombres coincidan con tu AnimationTree
 @export_group("Animaciones")
-@export var anim_tree: AnimationTree # ¡ARRASTRA TU ANIMATIONTREE AQUÍ EN EL INSPECTOR!
-
-# Nombres exactos de los estados (según tu imagen):
+@export var anim_tree: AnimationTree # ¡ARRASTRA TU ANIMATIONTREE AQUÍ!
 @export var estado_spawn: String = "Rig_Medium_General_Spawn_Ground"
 @export var estado_idle: String = "Rig_Medium_General_Idle_A"
 @export var estado_correr: String = "Rig_Medium_MovementBasic_Running_A"
@@ -31,45 +30,54 @@ var vida_actual: int
 
 # --- REFERENCIAS ---
 @onready var brazo_camara: SpringArm3D = $SpringArm3D
-@onready var modelo: Node3D = $MeshInstance3D 
+# Usa @export para el modelo por si el nodo se llama diferente (ej. Rig, Armature)
+@export var modelo: Node3D 
 
+# --- VARIABLES INTERNAS ---
 var gravedad: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var state_machine # Controlador de la máquina de estados
-var control_bloqueado: bool = false # Para impedir movimiento al morir
+var control_bloqueado: bool = false # Para muerte
+var esta_herido: bool = false # Para aturdimiento por golpe
 
 func _ready():
-	# Nos aseguramos de estar en el grupo Jugador para que los enemigos nos vean
+	# Grupo para que los enemigos nos detecten
 	add_to_group("Jugador")
 	
-	# Atrapamos el mouse dentro de la ventana del juego
+	# Atrapamos el mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
+	# Salud inicial
 	vida_actual = vida_maxima
 	vida_cambiada.emit(vida_actual)
 	
-	# Iniciar la máquina de estados
+	# Iniciar Animaciones
 	if anim_tree:
+		if not anim_tree.active:
+			anim_tree.active = true
 		state_machine = anim_tree.get("parameters/playback")
-		# Reproducir animación de aparición al inicio
-		state_machine.travel(estado_spawn)
+		# Iniciamos con la aparición
+		start_anim(estado_spawn)
 	else:
-		print("¡ALERTA! No asignaste el AnimationTree en el Inspector del Jugador.")
+		push_error("ERROR: Falta asignar el AnimationTree en el Inspector del Jugador")
 
 func _input(event):
-	if control_bloqueado: return # Si mueres, no mueves la cámara
+	# Si estamos muertos, no movemos la cámara
+	if control_bloqueado: return
 
-	# --- CÁMARA ---
+	# --- CÁMARA (MOUSE) ---
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		# Girar al personaje (Izquierda/Derecha)
+		# 1. Girar al personaje entero (Eje Y - Izquierda/Derecha)
+		# El signo "-" es lo estándar. Si gira al revés, quítalo.
 		rotate_y(-event.relative.x * sensibilidad_mouse)
 		
-		# Mirar Arriba/Abajo (Mouse Arriba = Mirar Arriba)
+		# 2. Mover solo la cabeza/brazo (Eje X - Arriba/Abajo)
+		# El signo "-" aquí hace que Mouse Arriba = Mirar Arriba (Estilo Shooter)
 		brazo_camara.rotate_x(-event.relative.y * sensibilidad_mouse)
 		
-		# Limitar la rotación para no romperse el cuello
+		# Limitar cuello (Clamp)
 		brazo_camara.rotation.x = clamp(brazo_camara.rotation.x, deg_to_rad(-70), deg_to_rad(60))
 
-	# Tecla ESC para liberar el mouse
+	# Tecla ESC para liberar mouse
 	if event.is_action_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -77,66 +85,84 @@ func _input(event):
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
-	# Gravedad
+	# 1. Gravedad (Siempre aplica, estemos como estemos)
 	if not is_on_floor():
 		velocity.y -= gravedad * delta
 
-	if control_bloqueado:
+	# 2. SI ESTAMOS HERIDOS O MUERTOS, NO NOS MOVEMOS
+	if control_bloqueado or esta_herido:
+		# Solo aplicamos la gravedad calculada arriba y salimos
 		move_and_slide()
-		return
+		return 
 
-	# Salto
+	# 3. Salto
 	if Input.is_action_just_pressed("saltar") and is_on_floor():
 		velocity.y = velocidad_salto
-		state_machine.travel(estado_saltar) # Activar animación salto
+		travel_anim(estado_saltar)
 
-	# Movimiento WASD
+	# 4. Movimiento WASD
+	# get_vector: (neg_x, pos_x, neg_y, pos_y) -> (Izquierda, Derecha, Adelante, Atras)
 	var input_dir = Input.get_vector("mover_izquierda", "mover_derecha", "mover_adelante", "mover_atras")
 	
-	# CORRECCIÓN DE DIRECCIÓN:
-
+	# Calculamos la dirección relativa a hacia donde mira el personaje
+	# Vector3(x, 0, y) es lo estándar.
 	var direccion = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direccion:
 		velocity.x = direccion.x * velocidad
 		velocity.z = direccion.z * velocidad
 		
-		# Si estamos en el suelo y moviéndonos -> ANIMACIÓN CORRER
+		# Animación correr solo si estamos en el piso (para no cortar el salto)
 		if is_on_floor():
-			state_machine.travel(estado_correr)
-			
+			travel_anim(estado_correr)
 	else:
-		# Frenado suave
+		# Frenado
 		velocity.x = move_toward(velocity.x, 0, velocidad)
 		velocity.z = move_toward(velocity.z, 0, velocidad)
 		
-		# Si estamos en el suelo y quietos -> ANIMACIÓN IDLE
+		# Animación Idle
 		if is_on_floor():
-			state_machine.travel(estado_idle)
+			travel_anim(estado_idle)
 
 	move_and_slide()
 
-# --- DAÑO Y MUERTE ---
+# --- AYUDANTES DE ANIMACIÓN ---
+func travel_anim(nombre: String):
+	if state_machine: state_machine.travel(nombre)
+
+func start_anim(nombre: String):
+	if state_machine: state_machine.start(nombre)
+
+# --- DAÑO Y EVENTOS ---
 func recibir_dano(cantidad: int):
-	if vida_actual <= 0: return
+	if vida_actual <= 0: return # Ya está muerto
 	
+	# 1. Restar vida
 	vida_actual -= cantidad
 	print("Jugador: ¡Auch! Vida restante: ", vida_actual)
 	vida_cambiada.emit(vida_actual)
 	
-	# Animación de recibir golpe
-	state_machine.travel(estado_golpe)
+	# 2. Activar estado de herido (Bloquea movimiento en _physics_process)
+	esta_herido = true
 	
+	# 3. Forzar animación de golpe inmediatamente
+	start_anim(estado_golpe)
+	
+	# 4. Verificar muerte o recuperación
 	if vida_actual <= 0:
 		morir()
+	else:
+		# Esperamos 0.5 segundos aturdidos para ver la animación
+		await get_tree().create_timer(0.5).timeout
+		esta_herido = false
+		# Al terminar el tiempo, _physics_process volverá a permitir moverse
 
 func morir():
 	print("Jugador: GAME OVER")
 	control_bloqueado = true
-	state_machine.travel(estado_muerte)
+	start_anim(estado_muerte)
 	jugador_muerto.emit()
 
 func recolectar_item():
 	print("Jugador: ¡Item recolectado!")
-	# Animación de recoger (usamos start para forzarla instantáneamente)
-	state_machine.start(estado_recoger)
+	start_anim(estado_recoger)
