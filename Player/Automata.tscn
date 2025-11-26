@@ -1,0 +1,93 @@
+[gd_scene load_steps=22 format=3 uid="uid://b7eso5vupqhs5"]
+
+[ext_resource type="Script" uid="uid://cetnkkdmwbnwp" path="res://Player/automata.gd" id="1_yjgvh"]
+[ext_resource type="PackedScene" uid="uid://cwpdckvpfxu4q" path="res://Enemies/Models/characters/gltf/Ranger.glb" id="2_uchpe"]
+[ext_resource type="AnimationLibrary" uid="uid://tba78mbymyyl" path="res://Enemies/Animaciones/Rig_Medium/Crouching.fbx" id="3_1rsk0"]
+[ext_resource type="AnimationLibrary" uid="uid://b40d85y1d7h8u" path="res://Enemies/Animaciones/Rig_Medium/Rig_Medium_General.glb" id="3_yjgvh"]
+[ext_resource type="AnimationLibrary" uid="uid://dyvj6tgbkj7wq" path="res://Enemies/Animaciones/Rig_Medium/Rig_Medium_MovementBasic.glb" id="4_1rsk0"]
+[ext_resource type="AnimationLibrary" uid="uid://ccila5w2yasvt" path="res://Enemies/Animaciones/Rig_Medium/Crouching Idle.fbx" id="4_eqalk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yjgvh"]
+animation = &"Crouching Idle/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1rsk0"]
+animation = &"Rig_Medium_General/Idle_A"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eqalk"]
+animation = &"Rig_Medium_MovementBasic/Jump_Full_Short"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wd2eg"]
+animation = &"Rig_Medium_MovementBasic/Running_A"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ox8x6"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_huvt2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ngr5i"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kw3on"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aw7mt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uenb0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_821wb"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fciwr"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwyg1"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_c6x0f"]
+states/Crouching/node = SubResource("AnimationNodeAnimation_yjgvh")
+states/Crouching/position = Vector2(417, -27.748962)
+states/End/position = Vector2(1279, 46)
+states/Idle/node = SubResource("AnimationNodeAnimation_1rsk0")
+states/Idle/position = Vector2(291, 46)
+states/Jump/node = SubResource("AnimationNodeAnimation_eqalk")
+states/Jump/position = Vector2(527, 46)
+states/Run/node = SubResource("AnimationNodeAnimation_wd2eg")
+states/Run/position = Vector2(405, 128.25104)
+states/Start/position = Vector2(138, 46)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ox8x6"), "Idle", "Crouching", SubResource("AnimationNodeStateMachineTransition_huvt2"), "Crouching", "Idle", SubResource("AnimationNodeStateMachineTransition_ngr5i"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_kw3on"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_aw7mt"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_uenb0"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_821wb"), "Jump", "Crouching", SubResource("AnimationNodeStateMachineTransition_fciwr"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwyg1")]
+graph_offset = Vector2(0, -79.74896)
+
+[node name="automata" type="CharacterBody3D" groups=["jugador"]]
+script = ExtResource("1_yjgvh")
+
+[node name="Ranger" parent="." instance=ExtResource("2_uchpe")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1094732, 0)
+shape = SubResource("CapsuleShape3D_4ntmi")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.4826671)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Ranger")
+tree_root = SubResource("AnimationNodeStateMachine_c6x0f")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Ranger")
+libraries = {
+&"Crouching": ExtResource("3_1rsk0"),
+&"Crouching Idle": ExtResource("4_eqalk"),
+&"Rig_Medium_General": ExtResource("3_yjgvh"),
+&"Rig_Medium_MovementBasic": ExtResource("4_1rsk0")
+}
