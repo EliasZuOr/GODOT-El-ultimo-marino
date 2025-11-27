@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b7eso5vupqhs5"]
+[gd_scene load_steps=24 format=3 uid="uid://b7eso5vupqhs5"]
 
 [ext_resource type="Script" uid="uid://cetnkkdmwbnwp" path="res://Player/automata.gd" id="1_yjgvh"]
 [ext_resource type="PackedScene" uid="uid://cwpdckvpfxu4q" path="res://Enemies/Models/characters/gltf/Ranger.glb" id="2_uchpe"]
@@ -25,22 +25,15 @@ animation = &"Rig_Medium_MovementBasic/Running_A"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_huvt2"]
-advance_mode = 2
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ngr5i"]
-advance_mode = 2
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kw3on"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aw7mt"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uenb0"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_821wb"]
-advance_mode = 2
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fciwr"]
 advance_mode = 2
@@ -48,9 +41,21 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwyg1"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yjgvh"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1rsk0"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eqalk"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wd2eg"]
+advance_mode = 0
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_c6x0f"]
-states/Crouching/node = SubResource("AnimationNodeAnimation_yjgvh")
-states/Crouching/position = Vector2(417, -27.748962)
+states/Crouch/node = SubResource("AnimationNodeAnimation_yjgvh")
+states/Crouch/position = Vector2(417, -27.748962)
 states/End/position = Vector2(1279, 46)
 states/Idle/node = SubResource("AnimationNodeAnimation_1rsk0")
 states/Idle/position = Vector2(291, 46)
@@ -59,7 +64,7 @@ states/Jump/position = Vector2(527, 46)
 states/Run/node = SubResource("AnimationNodeAnimation_wd2eg")
 states/Run/position = Vector2(405, 128.25104)
 states/Start/position = Vector2(138, 46)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ox8x6"), "Idle", "Crouching", SubResource("AnimationNodeStateMachineTransition_huvt2"), "Crouching", "Idle", SubResource("AnimationNodeStateMachineTransition_ngr5i"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_kw3on"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_aw7mt"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_uenb0"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_821wb"), "Jump", "Crouching", SubResource("AnimationNodeStateMachineTransition_fciwr"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwyg1")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ox8x6"), "Idle", "Crouch", SubResource("AnimationNodeStateMachineTransition_huvt2"), "Crouch", "Idle", SubResource("AnimationNodeStateMachineTransition_ngr5i"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_kw3on"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_uenb0"), "Jump", "Crouch", SubResource("AnimationNodeStateMachineTransition_fciwr"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwyg1"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_yjgvh"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_1rsk0"), "Run", "Crouch", SubResource("AnimationNodeStateMachineTransition_eqalk"), "Crouch", "Run", SubResource("AnimationNodeStateMachineTransition_wd2eg")]
 graph_offset = Vector2(0, -79.74896)
 
 [node name="automata" type="CharacterBody3D" groups=["jugador"]]
